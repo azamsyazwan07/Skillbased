@@ -11,12 +11,12 @@ try:
 
     client_socket.send(user_input.encode('utf-8'))
     reply = client_socket.recv(1024).decode('utf-8')
-      print("Replied from server: ", reply)
+    print("Replied from server:", reply)
 
 except ConnectionRefusedError:
     print("Connection failed. Check your server either if it is running and reachable or not.")
 except Exception as e:
-    print("Error detected: ", str(e))
+    print("Error detected:", str(e))
 
 finally:
     client_socket.close()
