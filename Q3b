@@ -1,0 +1,30 @@
+import socket
+
+def main():
+    host = "192.168.81.138"    
+    port = 8443
+
+    try:
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+        client_socket.connect((host, port))
+
+        print("Connected to the server!")
+
+        pressure_bar = float(input("Enter pressure in bar: "))
+
+        client_socket.send(str(pressure_bar).encode('utf-8'))
+
+        data = client_socket.recv(1024).decode('utf-8')
+
+        print("Converted pressure in atmosphere:", data)
+
+        client_socket.close()
+
+    except ConnectionRefusedError:
+        print("Connection to the server failed. Make sure the server is running and reachable.")
+    except Exception as e:
+        print("An error occurred:", e)
+
+if __name__ == "__main__":
+    main()
